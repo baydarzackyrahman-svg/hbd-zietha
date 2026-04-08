@@ -1,0 +1,194 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+   
+    background-image: url(https://i.pinimg.com/736x/fd/66/2a/fd662af2c5a53c5f241ec5c431f8466f.jpg);
+    
+    
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Foto tetap di tempat pas scroll */
+    background-repeat: no-repeat;
+    
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    /* Pake font Montserrat buat body, bukan yang norak */
+    font-family: 'Monsterrat', sans-serif; 
+    color: #fff; /* Default teks putih, serasi sama foto */
+}
+
+/* Lapisan Gelap Tipis Biar Teks Kebaca Tanpa Shadow Norak */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.25); /* Tipis aja, biar foto tetep jelas */
+    z-index: 1;
+}
+
+/* --- KARTU UTAMA (Slide 1 - Bersih) --- */
+.main-container {
+    position: relative;
+    /* Glassmorphism tipis biar latar nembus */
+    background: rgba(255, 255, 255, 0.08); 
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3.5rem;
+    border-radius: 35px; /* Rounded minimalis, jangan kaku tapi jangan bulet banget */
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    max-width: 450px;
+    width: 90%;
+    animation: slideUp 1s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Font Oswald: Tegas, Bersih, Gak Latin */
+.hbd-title { 
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem; 
+    font-weight: 700;
+    letter-spacing: 2px; /* Jarak antar huruf biar minimalis */
+    color: #fff;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+}
+
+/* Nama Doi - Pake Montserrat Bold, Kuning Aster */
+.birthday-name {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #02d7fd; /* Warna kuning aster dari foto, serasi dan kebaca */
+    margin-bottom: 2.5rem;
+    text-shadow:
+        1px 1px 0 #fff,
+        -1px 1px 0 #fff,
+        1px 1px 0 #fff,
+        -1px 1px 0 #fff;
+}
+/* TRIGGER KADO (Interaksi Keren Minimalis) */
+.gift-wrapper {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: 0.4s;
+}
+
+.gift-wrapper:hover {
+    transform: scale(1.1); /* Animasi kado membesar dikit */
+}
+
+.gift-icon {
+    font-size: 2.8rem; /* Kado kecil tapi jelas */
+    animation: giftBounce 2s infinite ease-in-out;
+}
+
+@keyframes giftBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.gift-text {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #ddd; /* Abu-abu terang biar gak mencolok */
+    letter-spacing: 1px;
+    margin-top: -5px;
+}
+
+/* --- SURPRISE MODAL (Kartu Ucapan Normal, Tanpa Hiasan di Sudut) --- */
+.overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 255, 255, ); /* Background gelap modal pekat */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transition: 0.5s;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.secret-card {
+    /* Glassmorphism gelap biar minimalis, kayak Toothless */
+    background: rgba(0, 0, 0, 0.45); 
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3.5rem;
+    border-radius: 30px;
+    max-width: 550px;
+    width: 85%;
+    position: relative;
+    text-align: center;
+    animation: modalPop 0.6s ease-out forwards;
+}
+
+@keyframes modalPop {
+    0% { transform: scale(0.6); opacity: 0; }
+    85% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.secret-card h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 1.8rem;
+}
+
+.wish-message p {
+    font-weight: 300; /* Montserrat light biar tipis berkelas */
+    color: #f0f0f0;
+    line-height: 2; /* Spasi baris lebar biar enak dibaca */
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+}
+
+/* Tombol Close Minimalis */
+.close-btn {
+    position: absolute;
+    top: 20px; right: 25px;
+    color: #fff;
+    font-size: 2.2rem;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 300;
+}
+.close-btn:hover { color: #ffd700; transform: scale(1.2); }
+
+/* Gak pake hiasan naga/bunga di sudut */
+
+/* --- RESPONSIVE BUAT HP (Dijamin gak mleyot) --- */
+@media (max-width: 600px) {
+    body {
+        /* Fotonya bakal motong bagian pinggir di HP, gak dipaksain gepeng */
+        background-size: cover;
+    }
+    .hbd-title { font-size: 1.8rem; }
+    .birthday-name { font-size: 1.6rem; }
+    .card, .main-container { padding: 2.5rem 1.5rem; }
+    .secret-card { padding: 2rem 1.2rem; width: 95%; }
+    .secret-card h2 { font-size: 1.5rem; }
+    .wish-message p { font-size: 1rem; line-height: 1.8; }
+}
